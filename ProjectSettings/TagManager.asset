@@ -1,0 +1,51 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 2
+  tags:
+  - DetectionEnd
+  - DetectionFront
+  - CheckPoint
+  - Throwable
+  - Floor
+  - Enemy
+  - Noise
+  - HiddingSpot
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - Floor
+  - Water
+  - UI
+  - Player
+  - Obstacule
+  - Throwable
+  - PlayerHide
+  - HiddenByShadow
+  - SantoGrial
+  - SantoGrialProtected
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  m_SortingLayers:
+  - name: Default
+    uniqueID: 0
+    locked: 0

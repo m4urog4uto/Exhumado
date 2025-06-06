@@ -10,7 +10,7 @@ public class CatchObject : MonoBehaviour
     private RaycastHit topRayHitInfo;
     private bool isRightClickPressed = false; // Estado para rastrear el clic derecho
 
-    [SerializeField] GameObject holdObjectSpawn;
+    public GameObject holdObjectSpawn;
 
     void Update()
     {

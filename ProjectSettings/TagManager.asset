@@ -12,6 +12,7 @@ TagManager:
   - Enemy
   - Noise
   - HiddingSpot
+  - SantoGrial
   layers:
   - Default
   - TransparentFX

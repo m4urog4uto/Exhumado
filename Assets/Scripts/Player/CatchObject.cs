@@ -8,9 +8,13 @@ public class CatchObject : MonoBehaviour
     public float range = 1f;
 
     private RaycastHit topRayHitInfo;
+    private RaycastHit centerRayHitInfo;
     private bool isRightClickPressed = false; // Estado para rastrear el clic derecho
 
     public GameObject holdObjectSpawn;
+
+    private bool hitFeet;
+    private bool hitCenter;
 
     void Update()
     {
@@ -25,27 +29,16 @@ public class CatchObject : MonoBehaviour
         Debug.DrawRay(originFeet, transform.forward * range, Color.red, 1f);
         Debug.DrawRay(originCenter, transform.forward * range, Color.blue, 1f);
 
-        bool hitFeet = Physics.Raycast(rayFeet, out topRayHitInfo, range, throwableLayer);
-        bool hitCenter = Physics.Raycast(rayCenter, out RaycastHit centerRayHitInfo, range, throwableLayer);
+        hitFeet = Physics.Raycast(rayFeet, out topRayHitInfo, range, throwableLayer);
+        hitCenter = Physics.Raycast(rayCenter, out centerRayHitInfo, range, throwableLayer);
 
         // Si cualquiera de los dos raycasts detecta un objeto
-        if ((hitFeet || hitCenter))
+        if (hitFeet || hitCenter)
         {
+            Debug.Log("Objeto detectado");
             if (Input.GetKeyDown(KeyCode.F))
             {
-                // Usar el hit más cercano (prioridad al de los pies)
-                RaycastHit hitInfo = hitFeet ? topRayHitInfo : centerRayHitInfo;
-                IObjectCatchable objectCatchable = hitInfo.transform.gameObject.GetComponent<IObjectCatchable>();
-                Rigidbody rbHeldObject = hitInfo.transform.GetComponent<Rigidbody>();
-                if (rbHeldObject != null)
-                {
-                    rbHeldObject.useGravity = false;
-                    rbHeldObject.isKinematic = true;
-                }
-                if (objectCatchable != null)
-                {
-                    objectCatchable.HoldObject(holdObjectSpawn);
-                }
+                CatchObj();
             }
         }
 
@@ -71,10 +64,15 @@ public class CatchObject : MonoBehaviour
 
     void CatchObj()
     {
-        IObjectCatchable objectCatchable = topRayHitInfo.transform.gameObject.GetComponent<IObjectCatchable>();
-        Rigidbody rbHeldObject = topRayHitInfo.transform.GetComponent<Rigidbody>();
-        rbHeldObject.useGravity = false;
-        rbHeldObject.isKinematic = true;
+        // Usar el hit más cercano (prioridad al de los pies)
+        RaycastHit hitInfo = hitFeet ? topRayHitInfo : centerRayHitInfo;
+        IObjectCatchable objectCatchable = hitInfo.transform.gameObject.GetComponent<IObjectCatchable>();
+        Rigidbody rbHeldObject = hitInfo.transform.GetComponent<Rigidbody>();
+        if (rbHeldObject != null)
+        {
+            rbHeldObject.useGravity = false;
+            rbHeldObject.isKinematic = true;
+        }
         if (objectCatchable != null)
         {
             objectCatchable.HoldObject(holdObjectSpawn);

@@ -6,6 +6,7 @@ public class ThrowableObject : MonoBehaviour, IObjectCatchable
 {
     public void HoldObject(GameObject holdObjectSpawn)
     {
+        Debug.Log("Objeto capturado: " + gameObject.name);
         transform.SetParent(holdObjectSpawn.transform);
         transform.position = holdObjectSpawn.transform.position;
         transform.rotation = holdObjectSpawn.transform.rotation;
